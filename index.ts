@@ -3,6 +3,7 @@ import "dotenv/config";
 import express from "express";
 
 import userRoutes from "./routes/user.route";
+import swaggerDocs from "./config/swagger";
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.get("/", (req, res) => {
 
 //User Routes
 app.use("/api/user", userRoutes);
+
+//Swagger Route
+swaggerDocs(app, PORT);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
