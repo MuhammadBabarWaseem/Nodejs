@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserController = exports.getAllUsersController = exports.getUserByEmailController = exports.updateUserController = exports.createUserController = void 0;
+exports.deleteUserController = exports.getAllUsersController = exports.getUserByIdController = exports.updateUserController = exports.createUserController = void 0;
 const express_validator_1 = require("express-validator");
 const user_service_1 = require("../service/user.service");
 const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -38,14 +38,14 @@ const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.createUserController = createUserController;
 const updateUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.query.email;
+    const id = req.query.id;
     const { name, password } = req.body;
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const user = yield (0, user_service_1.updateUser)(email, { name, password });
+        const user = yield (0, user_service_1.updateUser)(id, { name, password });
         return res.status(200).json({ message: "User updated successfully", user });
     }
     catch (error) {
@@ -63,10 +63,10 @@ const updateUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.updateUserController = updateUserController;
-const getUserByEmailController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.query.email;
+const getUserByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.query.id;
     try {
-        const user = yield (0, user_service_1.getUserByEmail)(email);
+        const user = yield (0, user_service_1.getUserById)(id);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -76,7 +76,7 @@ const getUserByEmailController = (req, res) => __awaiter(void 0, void 0, void 0,
         return res.status(500).json({ message: "Failed to get user", error });
     }
 });
-exports.getUserByEmailController = getUserByEmailController;
+exports.getUserByIdController = getUserByIdController;
 const getAllUsersController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield (0, user_service_1.getAllUsers)();
@@ -88,9 +88,9 @@ const getAllUsersController = (req, res) => __awaiter(void 0, void 0, void 0, fu
 });
 exports.getAllUsersController = getAllUsersController;
 const deleteUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.query.email;
+    const id = req.query.id;
     try {
-        const user = yield (0, user_service_1.deleteUser)(email);
+        const user = yield (0, user_service_1.deleteUser)(id);
         return res.status(200).json({ message: "User deleted successfully" });
     }
     catch (error) {
@@ -98,7 +98,9 @@ const deleteUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
             if (error.message === "User not found") {
                 return res.status(404).json({ message: "User not found" });
             }
-            return res.status(500).json({ message: "Failed to delete user", error: error.message });
+            return res
+                .status(500)
+                .json({ message: "Failed to delete user", error: error.message });
         }
         else {
             return res.status(500).json({ message: "Unknown error occurred" });

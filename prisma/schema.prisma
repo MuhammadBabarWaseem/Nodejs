@@ -31,7 +31,7 @@ model Post {
   title     String
   description   String
   author_id  String
-  comment_count BigInt @default(0)
+  comment_count Int @default(0)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }

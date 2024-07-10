@@ -62,9 +62,9 @@ router.post("/create", [
  *       - User Controller
  *     summary: Update user details
  *     parameters:
- *       - name: email
+ *       - name: id
  *         in: query
- *         description: The email of the user to update
+ *         description: The id of the user to update
  *         required: true
  *         schema:
  *           type: string
@@ -109,11 +109,11 @@ router.put("/update", user_validation_1.validateUpdateUser, user_validation_1.va
  *   get:
  *     tags:
  *       - User Controller
- *     summary: Get a user by email
+ *     summary: Get a user by Id
  *     parameters:
- *       - name: email
+ *       - name: id
  *         in: query
- *         description: The email of the user
+ *         description: The id of the user
  *         required: true
  *         schema:
  *           type: string
@@ -127,7 +127,7 @@ router.put("/update", user_validation_1.validateUpdateUser, user_validation_1.va
  *       500:
  *         description: Server Error
  */
-router.get("/get", user_controller_1.getUserByEmailController);
+router.get("/get", user_controller_1.getUserByIdController);
 /**
  * @openapi
  * /api/user/getAll:
@@ -148,11 +148,11 @@ router.get("/getAll", user_controller_1.getAllUsersController);
  *   delete:
  *     tags:
  *       - User Controller
- *     summary: Delete user by email
+ *     summary: Delete user by id
  *     parameters:
- *       - name: email
+ *       - name: id
  *         in: query
- *         description: The email of the user to delete
+ *         description: The id of the user to delete
  *         required: true
  *         schema:
  *           type: string

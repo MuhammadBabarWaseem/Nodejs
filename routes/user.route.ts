@@ -5,7 +5,7 @@ import {
   createUserController,
   deleteUserController,
   getAllUsersController,
-  getUserByEmailController,
+  getUserByIdController,
   updateUserController,
 } from "../controller/user.controller";
 import {
@@ -78,9 +78,9 @@ router.post(
  *       - User Controller
  *     summary: Update user details
  *     parameters:
- *       - name: email
+ *       - name: id
  *         in: query
- *         description: The email of the user to update
+ *         description: The id of the user to update
  *         required: true
  *         schema:
  *           type: string
@@ -132,11 +132,11 @@ router.put(
  *   get:
  *     tags:
  *       - User Controller
- *     summary: Get a user by email
+ *     summary: Get a user by Id
  *     parameters:
- *       - name: email
+ *       - name: id
  *         in: query
- *         description: The email of the user
+ *         description: The id of the user
  *         required: true
  *         schema:
  *           type: string
@@ -150,7 +150,7 @@ router.put(
  *       500:
  *         description: Server Error
  */
-router.get("/get", getUserByEmailController);
+router.get("/get", getUserByIdController);
 
 /**
  * @openapi
@@ -173,11 +173,11 @@ router.get("/getAll", getAllUsersController);
  *   delete:
  *     tags:
  *       - User Controller
- *     summary: Delete user by email
+ *     summary: Delete user by id
  *     parameters:
- *       - name: email
+ *       - name: id
  *         in: query
- *         description: The email of the user to delete
+ *         description: The id of the user to delete
  *         required: true
  *         schema:
  *           type: string

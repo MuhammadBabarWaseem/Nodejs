@@ -30,7 +30,7 @@ export const createUser = async (
 };
 
 export const updateUser = async (
-  email: string,
+  id: string,
   updates: Partial<{
     name: string;
     password: string;
@@ -38,7 +38,7 @@ export const updateUser = async (
 ) => {
   const existingUser = await prisma.user.findUnique({
     where: {
-      email: email,
+      id: id,
     },
   });
 
@@ -66,7 +66,7 @@ export const updateUser = async (
 
   const updatedUser = await prisma.user.update({
     where: {
-      email: email,
+      id: id,
     },
     data: data,
   });
@@ -74,10 +74,14 @@ export const updateUser = async (
   return updatedUser;
 };
 
-export const getUserByEmail = async (email: string) => {
+export const getUserById = async (id: string) => {
   const user = await prisma.user.findUnique({
     where: {
-      email: email,
+      id: id,
+    },
+    include: {
+      posts: true,
+      comments: true,
     },
   });
 
@@ -90,22 +94,22 @@ export const getAllUsers = async () => {
   return users;
 };
 
-export const deleteUser = async (email: string) => {
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
-  
-    if (!existingUser) {
-      throw new Error("User not found");
-    }
-  
-    const deletedUser = await prisma.user.delete({
-      where: {
-        email: email,
-      },
-    });
-  
-    return deletedUser;
-  };
+export const deleteUser = async (id: string) => {
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!existingUser) {
+    throw new Error("User not found");
+  }
+
+  const deletedUser = await prisma.user.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return deletedUser;
+};

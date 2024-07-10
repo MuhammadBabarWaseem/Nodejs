@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.getAllUsers = exports.getUserByEmail = exports.updateUser = exports.createUser = void 0;
+exports.deleteUser = exports.getAllUsers = exports.getUserById = exports.updateUser = exports.createUser = void 0;
 const db_config_1 = __importDefault(require("../config/db.config"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const createUser = (name, email, password) => __awaiter(void 0, void 0, void 0, function* () {
@@ -35,10 +35,10 @@ const createUser = (name, email, password) => __awaiter(void 0, void 0, void 0, 
     return user;
 });
 exports.createUser = createUser;
-const updateUser = (email, updates) => __awaiter(void 0, void 0, void 0, function* () {
+const updateUser = (id, updates) => __awaiter(void 0, void 0, void 0, function* () {
     const existingUser = yield db_config_1.default.user.findUnique({
         where: {
-            email: email,
+            id: id,
         },
     });
     if (!existingUser) {
@@ -56,31 +56,35 @@ const updateUser = (email, updates) => __awaiter(void 0, void 0, void 0, functio
     data.updated_at = new Date();
     const updatedUser = yield db_config_1.default.user.update({
         where: {
-            email: email,
+            id: id,
         },
         data: data,
     });
     return updatedUser;
 });
 exports.updateUser = updateUser;
-const getUserByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
+const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield db_config_1.default.user.findUnique({
         where: {
-            email: email,
+            id: id,
+        },
+        include: {
+            posts: true,
+            comments: true,
         },
     });
     return user;
 });
-exports.getUserByEmail = getUserByEmail;
+exports.getUserById = getUserById;
 const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield db_config_1.default.user.findMany();
     return users;
 });
 exports.getAllUsers = getAllUsers;
-const deleteUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const existingUser = yield db_config_1.default.user.findUnique({
         where: {
-            email: email,
+            id: id,
         },
     });
     if (!existingUser) {
@@ -88,7 +92,7 @@ const deleteUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const deletedUser = yield db_config_1.default.user.delete({
         where: {
-            email: email,
+            id: id,
         },
     });
     return deletedUser;

@@ -3,6 +3,7 @@ import "dotenv/config";
 import express from "express";
 
 import userRoutes from "./routes/user.route";
+import postRoutes from "./routes/post.route";
 import swaggerDocs from "./config/swagger";
 
 const app = express();
@@ -17,6 +18,9 @@ app.get("/", (req, res) => {
 
 //User Routes
 app.use("/api/user", userRoutes);
+
+//Post Routes
+app.use("/api/post", postRoutes);
 
 //Swagger Route
 swaggerDocs(app, PORT);
