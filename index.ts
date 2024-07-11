@@ -4,6 +4,7 @@ import express from "express";
 
 import userRoutes from "./routes/user.route";
 import postRoutes from "./routes/post.route";
+import commentRoutes from "./routes/comment.route";
 import swaggerDocs from "./config/swagger";
 
 const app = express();
@@ -21,6 +22,9 @@ app.use("/api/user", userRoutes);
 
 //Post Routes
 app.use("/api/post", postRoutes);
+
+//Comment Route
+app.use("/api/comment", commentRoutes);
 
 //Swagger Route
 swaggerDocs(app, PORT);

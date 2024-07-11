@@ -14,7 +14,11 @@ const options = {
       version: "1.0.0",
     },
   },
-  apis: ["./routes/user.route.ts", "./routes/post.route.ts"],
+  apis: [
+    "./routes/user.route.ts",
+    "./routes/post.route.ts",
+    "./routes/comment.route.ts",
+  ],
 };
 const swaggerSpec = swaggerJsdoc(options);
 function swaggerDocs(app: Express, port: string | number) {

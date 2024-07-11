@@ -40,7 +40,6 @@ model Comment {
   id        String   @id @default(cuid())
   post      Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
   author    User     @relation(fields: [author_id], references: [id], onDelete: Cascade)
-  content   String
   post_id   String
   comment   String
   author_id String
