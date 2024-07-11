@@ -6,3 +6,4 @@
 - Express JS
 - PostgreSQL (Using Aiven)
 - Prisma
+- Swagger For API Documentation
