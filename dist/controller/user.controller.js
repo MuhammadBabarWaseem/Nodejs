@@ -90,7 +90,7 @@ exports.getAllUsersController = getAllUsersController;
 const deleteUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.query.id;
     try {
-        const user = yield (0, user_service_1.deleteUser)(id);
+        yield (0, user_service_1.deleteUser)(id);
         return res.status(200).json({ message: "User deleted successfully" });
     }
     catch (error) {

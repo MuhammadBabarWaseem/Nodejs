@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatePostController = exports.createPostController = void 0;
+exports.getPostsByAuthorIdController = exports.getAllPostsController = exports.getPostByIdController = exports.deletePostController = exports.updatePostController = exports.createPostController = void 0;
 const express_validator_1 = require("express-validator");
 const post_service_1 = require("../service/post.service");
 const createPostController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -62,3 +62,86 @@ const updatePostController = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.updatePostController = updatePostController;
+const deletePostController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.query.id;
+    console.log({ id });
+    try {
+        yield (0, post_service_1.deletePost)(id);
+        return res.status(200).json({ message: "Post deleted successfully" });
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            if (error.message === "Post not found") {
+                return res.status(404).json({ message: "Post not found" });
+            }
+            return res
+                .status(500)
+                .json({ message: "Failed to delete Post", error: error.message });
+        }
+        else {
+            return res.status(500).json({ message: "Unknown error occurred" });
+        }
+    }
+});
+exports.deletePostController = deletePostController;
+const getPostByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.query.id;
+    try {
+        const post = yield (0, post_service_1.getPostById)(id);
+        return res.status(200).json(post);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            if (error.message === "Post not found") {
+                return res.status(404).json({ message: "Post not found" });
+            }
+            return res
+                .status(500)
+                .json({ message: "Failed to get Post", error: error.message });
+        }
+        else {
+            return res.status(500).json({ message: "Unknown error occurred" });
+        }
+    }
+});
+exports.getPostByIdController = getPostByIdController;
+const getAllPostsController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const posts = yield (0, post_service_1.getAllPosts)();
+        return res.status(200).json(posts);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            return res
+                .status(500)
+                .json({ message: "Failed to get Posts", error: error.message });
+        }
+        else {
+            return res.status(500).json({ message: "Unknown error occurred" });
+        }
+    }
+});
+exports.getAllPostsController = getAllPostsController;
+const getPostsByAuthorIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const author_id = req.query.author_id;
+    try {
+        const posts = yield (0, post_service_1.getPostsByAuthorId)(author_id);
+        return res.status(200).json(posts);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            if (error.message === "No post found for this author") {
+                return res
+                    .status(404)
+                    .json({ message: "No post found for this author" });
+            }
+            return res
+                .status(500)
+                .json({ message: "Failed to get Posts", error: error.message });
+        }
+        else {
+            return res.status(500).json({ message: "Unknown error occurred" });
+        }
+    }
+});
+exports.getPostsByAuthorIdController = getPostsByAuthorIdController;

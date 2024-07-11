@@ -1,6 +1,10 @@
 import { Router } from "express";
 import {
   createPostController,
+  deletePostController,
+  getAllPostsController,
+  getPostByIdController,
+  getPostsByAuthorIdController,
   updatePostController,
 } from "../controller/post.controller";
 import {
@@ -10,7 +14,6 @@ import {
 } from "../middleware/post.validation";
 
 const router = Router();
-
 
 /** POST Methods */
 /**
@@ -107,5 +110,97 @@ router.post("/create", createPostValidator, validate, createPostController);
  *        description: Server Error
  */
 router.put("/update", updatePostValidator, validate, updatePostController);
+
+/**
+ * @openapi
+ * /api/post/delete:
+ *   delete:
+ *     tags:
+ *       - Post Controller
+ *     summary: Delete post by id
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *         description: The id of the post to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Post deleted successfully
+ *       404:
+ *         description: Post not found
+ *       500:
+ *         description: Server Error
+ */
+router.delete("/delete", deletePostController);
+
+/**
+ * @openapi
+ * /api/post/getById:
+ *   get:
+ *     tags:
+ *       - Post Controller
+ *     summary: Get a post by Id
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *         description: The id of the Post
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returned Post
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: Post Not Found
+ *       500:
+ *         description: Server Error
+ */
+router.get("/getById", getPostByIdController);
+
+/**
+ * @openapi
+ * /api/post/getAll:
+ *   get:
+ *     tags:
+ *       - Post Controller
+ *     summary: Get all posts
+ *     responses:
+ *       200:
+ *         description: A list of all post
+ *       500:
+ *         description: Server Error
+ */
+router.get("/getAll", getAllPostsController);
+
+
+/**
+ * @openapi
+ * /api/post/getAuthorPosts:
+ *   get:
+ *     tags:
+ *       - Post Controller
+ *     summary: Get Posts by Author Id
+ *     parameters:
+ *       - name: author_id
+ *         in: query
+ *         description: The id of the Author
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returned Posts
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: Post Not Found
+ *       500:
+ *         description: Server Error
+ */
+router.get("/getAuthorPosts", getPostsByAuthorIdController);
 
 export default router;

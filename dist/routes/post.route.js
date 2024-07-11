@@ -98,4 +98,91 @@ router.post("/create", post_validation_1.createPostValidator, post_validation_1.
  *        description: Server Error
  */
 router.put("/update", post_validation_1.updatePostValidator, post_validation_1.validate, post_controller_1.updatePostController);
+/**
+ * @openapi
+ * /api/post/delete:
+ *   delete:
+ *     tags:
+ *       - Post Controller
+ *     summary: Delete post by id
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *         description: The id of the post to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Post deleted successfully
+ *       404:
+ *         description: Post not found
+ *       500:
+ *         description: Server Error
+ */
+router.delete("/delete", post_controller_1.deletePostController);
+/**
+ * @openapi
+ * /api/post/getById:
+ *   get:
+ *     tags:
+ *       - Post Controller
+ *     summary: Get a post by Id
+ *     parameters:
+ *       - name: id
+ *         in: query
+ *         description: The id of the Post
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returned Post
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: Post Not Found
+ *       500:
+ *         description: Server Error
+ */
+router.get("/getById", post_controller_1.getPostByIdController);
+/**
+ * @openapi
+ * /api/post/getAll:
+ *   get:
+ *     tags:
+ *       - Post Controller
+ *     summary: Get all posts
+ *     responses:
+ *       200:
+ *         description: A list of all post
+ *       500:
+ *         description: Server Error
+ */
+router.get("/getAll", post_controller_1.getAllPostsController);
+/**
+ * @openapi
+ * /api/post/getAuthorPosts:
+ *   get:
+ *     tags:
+ *       - Post Controller
+ *     summary: Get Posts by Author Id
+ *     parameters:
+ *       - name: author_id
+ *         in: query
+ *         description: The id of the Author
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returned Posts
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: Post Not Found
+ *       500:
+ *         description: Server Error
+ */
+router.get("/getAuthorPosts", post_controller_1.getPostsByAuthorIdController);
 exports.default = router;

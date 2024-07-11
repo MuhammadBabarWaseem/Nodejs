@@ -87,7 +87,7 @@ export const deleteUserController = async (req: Request, res: Response) => {
   const id = req.query.id as string;
 
   try {
-    const user = await deleteUser(id);
+    await deleteUser(id);
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     if (error instanceof Error) {

@@ -51,3 +51,58 @@ export const updatePost = async (
     throw error;
   }
 };
+
+export const deletePost = async (id: string) => {
+  const existingPost = await prisma.post.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!existingPost) {
+    throw new Error("Post not found");
+  }
+
+  try {
+    await prisma.post.delete({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
+};
+
+export const getPostById = async (id: string) => {
+  const post = await prisma.post.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!post) {
+    throw new Error("Post not found");
+  }
+
+  return post;
+};
+
+export const getAllPosts = async () => {
+  return await prisma.post.findMany();
+};
+
+export const getPostsByAuthorId = async (authorId: string) => {
+  const authorsPost = await prisma.post.findMany({
+    where: {
+      author_id: authorId,
+    },
+  });
+
+  if (!authorsPost) {
+    throw new Error("No post found for this author");
+  }
+
+  return authorsPost;
+};
