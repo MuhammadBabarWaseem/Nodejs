@@ -21,7 +21,7 @@ const router = Router();
  * '/api/user/create':
  *  post:
  *     tags:
- *     - User Controller
+ *     - User Routes
  *     summary: Create a user
  *     requestBody:
  *      required: true
@@ -75,7 +75,7 @@ router.post(
  * /api/user/update:
  *   put:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Update user details
  *     parameters:
  *       - name: id
@@ -131,7 +131,7 @@ router.put(
  * /api/user/get:
  *   get:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Get a user by Id
  *     parameters:
  *       - name: id
@@ -157,7 +157,7 @@ router.get("/get", getUserByIdController);
  * /api/user/getAll:
  *   get:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Get all users
  *     responses:
  *       200:
@@ -172,7 +172,7 @@ router.get("/getAll", getAllUsersController);
  * /api/user/delete:
  *   delete:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Delete user by id
  *     parameters:
  *       - name: id

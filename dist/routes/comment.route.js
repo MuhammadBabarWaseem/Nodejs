@@ -10,7 +10,7 @@ const router = (0, express_1.Router)();
  * '/api/comment/create':
  *  post:
  *     tags:
- *     - Comment Controller
+ *     - Comment Routes
  *     summary: Create a Comment
  *     requestBody:
  *      required: true
@@ -49,7 +49,7 @@ router.post("/create", comment_validation_1.createCommentValidator, comment_vali
  * '/api/comment/update':
  *  put:
  *     tags:
- *     - Comment Controller
+ *     - Comment Routes
  *     summary: Update a Comment
  *     parameters:
  *       - name: id

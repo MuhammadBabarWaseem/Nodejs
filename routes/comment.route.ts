@@ -8,7 +8,6 @@ import {
   createCommentController,
   updateCommentController,
 } from "../controller/comment.controller";
-import { updateComment } from "service/comment.service";
 
 const router = Router();
 
@@ -18,7 +17,7 @@ const router = Router();
  * '/api/comment/create':
  *  post:
  *     tags:
- *     - Comment Controller
+ *     - Comment Routes
  *     summary: Create a Comment
  *     requestBody:
  *      required: true
@@ -64,7 +63,7 @@ router.post(
  * '/api/comment/update':
  *  put:
  *     tags:
- *     - Comment Controller
+ *     - Comment Routes
  *     summary: Update a Comment
  *     parameters:
  *       - name: id

@@ -11,7 +11,7 @@ const router = (0, express_1.Router)();
  * '/api/user/create':
  *  post:
  *     tags:
- *     - User Controller
+ *     - User Routes
  *     summary: Create a user
  *     requestBody:
  *      required: true
@@ -59,7 +59,7 @@ router.post("/create", [
  * /api/user/update:
  *   put:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Update user details
  *     parameters:
  *       - name: id
@@ -108,7 +108,7 @@ router.put("/update", user_validation_1.validateUpdateUser, user_validation_1.va
  * /api/user/get:
  *   get:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Get a user by Id
  *     parameters:
  *       - name: id
@@ -133,7 +133,7 @@ router.get("/get", user_controller_1.getUserByIdController);
  * /api/user/getAll:
  *   get:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Get all users
  *     responses:
  *       200:
@@ -147,7 +147,7 @@ router.get("/getAll", user_controller_1.getAllUsersController);
  * /api/user/delete:
  *   delete:
  *     tags:
- *       - User Controller
+ *       - User Routes
  *     summary: Delete user by id
  *     parameters:
  *       - name: id

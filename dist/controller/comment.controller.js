@@ -79,12 +79,6 @@ const updateCommentController = (req, res) => __awaiter(void 0, void 0, void 0, 
             return res.status(500).json({ message: "Unknown error occurred" });
         }
     }
-    //   catch (error) {
-    //     return res.status(500).json({
-    //       message: "Failed to update comment",
-    //       error: (error as Error).message,
-    //     });
-    //   }
 });
 exports.updateCommentController = updateCommentController;
 const deleteCommentController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

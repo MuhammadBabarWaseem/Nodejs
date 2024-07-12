@@ -76,12 +76,6 @@ export const updateCommentController = async (req: Request, res: Response) => {
       return res.status(500).json({ message: "Unknown error occurred" });
     }
   }
-  //   catch (error) {
-  //     return res.status(500).json({
-  //       message: "Failed to update comment",
-  //       error: (error as Error).message,
-  //     });
-  //   }
 };
 
 export const deleteCommentController = async (req: Request, res: Response) => {

@@ -10,7 +10,7 @@ const router = (0, express_1.Router)();
  * '/api/post/create':
  *  post:
  *     tags:
- *     - Post Controller
+ *     - Post Routes
  *     summary: Create a Post
  *     requestBody:
  *      required: true
@@ -49,7 +49,7 @@ router.post("/create", post_validation_1.createPostValidator, post_validation_1.
  * '/api/post/update':
  *  put:
  *     tags:
- *     - Post Controller
+ *     - Post Routes
  *     summary: Update a Post
  *     parameters:
  *       - name: id
@@ -103,7 +103,7 @@ router.put("/update", post_validation_1.updatePostValidator, post_validation_1.v
  * /api/post/delete:
  *   delete:
  *     tags:
- *       - Post Controller
+ *       - Post Routes
  *     summary: Delete post by id
  *     parameters:
  *       - name: id
@@ -126,7 +126,7 @@ router.delete("/delete", post_controller_1.deletePostController);
  * /api/post/getById:
  *   get:
  *     tags:
- *       - Post Controller
+ *       - Post Routes
  *     summary: Get a post by Id
  *     parameters:
  *       - name: id
@@ -151,7 +151,7 @@ router.get("/getById", post_controller_1.getPostByIdController);
  * /api/post/getAll:
  *   get:
  *     tags:
- *       - Post Controller
+ *       - Post Routes
  *     summary: Get all posts
  *     responses:
  *       200:
@@ -165,7 +165,7 @@ router.get("/getAll", post_controller_1.getAllPostsController);
  * /api/post/getAuthorPosts:
  *   get:
  *     tags:
- *       - Post Controller
+ *       - Post Routes
  *     summary: Get Posts by Author Id
  *     parameters:
  *       - name: author_id
