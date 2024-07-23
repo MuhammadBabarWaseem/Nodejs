@@ -22,7 +22,7 @@ const router = Router();
  *  post:
  *     tags:
  *     - User Routes
- *     summary: Create a user
+ *     summary: Create a userrrr
  *     requestBody:
  *      required: true
  *      content:
